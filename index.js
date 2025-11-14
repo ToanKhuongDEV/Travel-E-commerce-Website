@@ -3,8 +3,8 @@ require("dotenv").config();
 const path = require("path");
 const database = require("./config/database");
 const clientRoutes = require("./routes/client/index-router");
+const adminRoutes = require("./routes/admin/index-route");
 // ----------------
-
 
 //setup
 const app = express();
@@ -16,6 +16,7 @@ app.set("view engine", "pug");
 app.use(express.static(path.join(__dirname, "public")));
 
 // nhúng route tổng
+app.use("/admin", adminRoutes);
 app.use("/", clientRoutes);
 
 // start server
