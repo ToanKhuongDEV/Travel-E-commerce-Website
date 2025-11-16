@@ -1,7 +1,7 @@
 extends ../layouts/default.pug
 
 block main
-  h1.box-title Quản lý người dùng
+  h1.box-title Quản lý danh mục
 
   //- Section 4
   .section-4
@@ -13,6 +13,11 @@ block main
           option(value="") Trạng thái
           option(value="") Hoạt động
           option(value="") Tạm dừng
+      .inner-item
+        select
+          option(value="") Người tạo
+          option(value="") Lê Văn A
+          option(value="") Lê Văn B
       .inner-item.inner-date
         input(type="date")
         span -
@@ -36,6 +41,8 @@ block main
       .inner-search
         <i class="fa-solid fa-magnifying-glass"></i>
         input(type="text" placeholder="Tìm kiếm")
+      .inner-button-create
+        a(href=`/${pathAdmin}/category/create`) + Tạo mới
   //- End Section 5
 
   //- Section 6
@@ -46,25 +53,48 @@ block main
           tr
             th(class="inner-center")
               input(type="checkbox" class="inner-check")
-            th Họ tên
-            th(class="inner-center") Ảnh đại diện
-            th Email
-            th Số điện thoại
-            th Địa chỉ
-            th Trạng thái
+            th Tên danh mục
+            th Ảnh đại diện
+            th(class="inner-center") Vị trí
+            th(class="inner-center") Trạng thái
+            th Tạo bởi
+            th Cập nhật bởi
             th Hành động
         tbody
           tr
             td(class="inner-center")
               input(type="checkbox" class="inner-check")
-            td Lê Văn A
-            td(class="inner-center")
-              img(src="/admin/assets/images/avatar.jpg" class="inner-avatar")
-            td levana@gmail.com
-            td 01234567890
-            td Số 123, đường ABC,...
+            td Danh mục 1
             td
+              img(src="/admin/assets/images/tour-1.jpg" class="inner-avatar")
+            td(class="inner-center") 1
+            td(class="inner-center")
               .badge.badge-green Hoạt động
+            td
+              div Lê Văn A
+              div.inner-time 16:30 - 20/10/2024
+            td
+              div Lê Văn A
+              div.inner-time 16:30 - 20/10/2024
+            td
+              .inner-buttons
+                button(class="inner-edit") <i class="fa-regular fa-pen-to-square"></i>
+                button(class="inner-delete") <i class="fa-regular fa-trash-can"></i>
+          tr
+            td(class="inner-center")
+              input(type="checkbox" class="inner-check")
+            td Danh mục 2
+            td
+              img(src="/admin/assets/images/tour-1.jpg" class="inner-avatar")
+            td(class="inner-center") 2
+            td(class="inner-center")
+              .badge.badge-green Hoạt động
+            td
+              div Lê Văn A
+              div.inner-time 16:30 - 20/10/2024
+            td
+              div Lê Văn A
+              div.inner-time 16:30 - 20/10/2024
             td
               .inner-buttons
                 button(class="inner-edit") <i class="fa-regular fa-pen-to-square"></i>
