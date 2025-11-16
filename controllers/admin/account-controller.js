@@ -1,4 +1,5 @@
 // account-controller.js
+const AccountAdmin = require("../../models/account-admin-model");
 
 module.exports.login = async (req, res) => {
 	res.render("admin/pages/login", {
@@ -9,6 +10,12 @@ module.exports.login = async (req, res) => {
 module.exports.register = async (req, res) => {
 	res.render("admin/pages/register", {
 		pageTitle: "Đăng Ký",
+	});
+};
+
+module.exports.registerInitial = async (req, res) => {
+	res.render("admin/pages/register-initial", {
+		pageTitle: "Tài khoản đã được khởi tạo",
 	});
 };
 
@@ -28,4 +35,31 @@ module.exports.resetPassword = async (req, res) => {
 	res.render("admin/pages/reset-password", {
 		pageTitle: "Đổi mật khẩu",
 	});
+};
+// -----------------------------------------------------------------
+
+module.exports.registerPost = async (req, res) => {
+	const { fullName, email, password } = req.body;
+
+	const existAccount = await AccountAdmin.findOne({ email });
+	if (existAccount) {
+		res.json({
+			code: "error",
+			message: "email existed!",
+		});
+		return;
+	}
+	const newAccount = new AccountAdmin({
+		fullName: fullName,
+		email: email,
+		password: password,
+		status: "inital",
+	});
+	await newAccount.save();
+
+	res.json({
+		code: "success",
+		message: "successful register",
+	});
+	return;
 };
