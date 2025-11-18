@@ -1,5 +1,6 @@
 // account-controller.js
 const AccountAdmin = require("../../models/account-admin-model");
+const bcrypt = require("bcryptjs")
 
 module.exports.login = async (req, res) => {
 	res.render("admin/pages/login", {
@@ -49,10 +50,14 @@ module.exports.registerPost = async (req, res) => {
 		});
 		return;
 	}
+	const salt = await bcrypt.genSalt(10);
+	const hashedPassword = await bcrypt.hash(password, salt);
+
+
 	const newAccount = new AccountAdmin({
 		fullName: fullName,
 		email: email,
-		password: password,
+		password: hashedPassword,
 		status: "inital",
 	});
 	await newAccount.save();
